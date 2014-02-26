@@ -15,12 +15,15 @@ import java.util.Set;
  *         Time: 5:50 PM
  */
 public class InmemoryToDoStore implements ToDoStore {
-    private static long nextId = 0;
+    private long nextId = 0;
 
     private Set<ToDo> todos = new HashSet<ToDo>();
 
     @Override
     public ToDo get(Long id) {
+        for (ToDo todo : todos) {
+            if (todo.getId().equals(id)) return todo;
+        }
         return null;
     }
 
@@ -37,6 +40,15 @@ public class InmemoryToDoStore implements ToDoStore {
 
     @Override
     public void delete(Long id) {
-
+        ToDo todo = null;
+        for (ToDo t : todos) {
+            if (t.getId().equals(id)) {
+                todo = t;
+                break;
+            }
+        }
+        if (todo != null) {
+            todos.remove(todo);
+        }
     }
 }
