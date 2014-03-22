@@ -39,7 +39,7 @@ public class InmemoryToDoStore implements ToDoStore {
     }
 
     @Override
-    public void delete(Long id) {
+    public Boolean delete(Long id) {
         ToDo todo = null;
         for (ToDo t : todos) {
             if (t.getId().equals(id)) {
@@ -49,6 +49,9 @@ public class InmemoryToDoStore implements ToDoStore {
         }
         if (todo != null) {
             todos.remove(todo);
+            return true;
         }
+
+        return false;
     }
 }

@@ -15,5 +15,5 @@ public interface ToDoStore {
     ToDo get(Long id);
     Collection<ToDo> getAll();
     void add(String title);
-    void delete(Long id);
+    Boolean delete(Long id);
 }

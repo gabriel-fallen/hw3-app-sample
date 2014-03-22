@@ -25,16 +25,21 @@ public class CommandProcessorImpl implements CommandProcessor {
 
     @Override
     public boolean handleClose(Long id) {
-        return false;
+        ToDo task = store.get(id);
+        if (task == null){
+            return false;
+        }
+        task.setCompleted(true);
+        return true;
     }
 
     @Override
     public boolean handleDelete(Long id) {
-        return false;
+        return store.delete(id);
     }
 
     @Override
     public Collection<ToDo> handleList() {
-        return null;
+        return store.getAll();
     }
 }
